@@ -3,6 +3,7 @@
 
 ## Tools
 
-### Whiteboard
-
-- [엑스칼리드로우](https://excalidraw.com/)
+- Whiteboard
+  - [엑스칼리드로우](https://excalidraw.com/)
+- Fake API
+  - [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
