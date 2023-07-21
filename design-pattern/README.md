@@ -25,3 +25,18 @@
     - “버튼 활성화” 상태에서는 버튼이 눌렸을 때 기능 비활성화가 작동한다.
 - Context에서의 if-else 대신 클래스가 각자의 책임(SRP)을 갖는 장점이 있다. 상태가 추가되어도 기존 기능에 영향을 미치지 않으며(OCP), 추가된 상태가 구현해야 하는 인터페이스를 구현하지 않으면 컴파일 에러로 알 수 있다.
     - “변경 중” 상태가 추가되어도 활성화/비활성화 버튼이 수정되지 않는다.
+
+### - 옵저버 패턴 (Observer Pattern)
+
+- 객체의 상태 변경될때 관찰자 모두에게 상태 변화를 알리는 패턴.
+- 구성
+    - Observer: 관찰자들은 해당 인터페이스를 구현해야 한다.
+    - Concrete Observer: 관찰자. 옵저버 인터페이스 구현체.
+    - Subject: 옵저버 관리(저장/추가/삭제) 및 알림 보내는 클래스
+    - Concrete Subject: Subject를 확장하는 옵저버의 관심 대상 클래스. 상태 변경시 옵저버들에게 알림을 보내는 메서드를 호출한다.
+- 객체 간 의존성을 최소화하고 상태 변화에 대해 핸들링이 가능해진다. 직접 상태 변화를 지켜보는게 아니라 알림을 받는 관찰자 라는 느낌으로 이루진다.
+- 스프링에서는 EventListener 어노테이션을 가진 메서드가 옵저버 패턴으로 알림을 받는다.
+    - Subject: AbstractApplicationEventMulticaster
+    - Concrete subjecct: SimpleApplciationEventMulticaster
+    - Observer: @EventListener 어노테이션
+    - Concrete observer: @EventListener 어노테이션이 달린 메서드
