@@ -39,4 +39,18 @@
     - Subject: AbstractApplicationEventMulticaster
     - Concrete subjecct: SimpleApplciationEventMulticaster
     - Observer: @EventListener 어노테이션
+ 
+### 어댑터 패턴 (Adapter Pattern)
+
+- 인터페이스가 호환되지 않는 클래스들을 함께 사용할 수 있도록 만들어주는 디자인 패턴
+- 구성
+    - Target: 클라이언트가 사용하고자 하는 인터페이스
+    - Adapter: Target 인터페이스를 구현하고 Adaptee의 메서드를 호출하는 클래스. 상속과 조합으로 구현할 수 있다.
+    - Adaptee: 클라이언트와 호환되지않는, 원하는 기능을 구현한 클래스.
+    - 클라이언트는 Target 인터페이스 사용을 통해 Adaptee를 사용한다.
+- 예) 220V 전원 →  맥북에 라이트닝 포트 연결해서 전원 공급
+    - Client: 맥북
+    - Target: 라이트닝 포트
+    - Adapter: 220V ↔ 라이트닝 전환
+    - Adaptee: 220V
     - Concrete observer: @EventListener 어노테이션이 달린 메서드
