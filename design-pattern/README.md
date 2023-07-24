@@ -54,3 +54,19 @@
     - Adapter: 220V ↔ 라이트닝 전환
     - Adaptee: 220V
     - Concrete observer: @EventListener 어노테이션이 달린 메서드
+
+### 커맨드 패턴 (Command Pattern)
+
+- 요청을 캡슐화하여 호출자와 수신자를 분리한다.
+- 구성
+    - Command: 명령 수행하는 인터페이스. execute()같은 작업 정의
+    - Concrete Command: 명령을 구현하는 클래스. Receiver 객체를 가지며 Receiver의 메서드를 사용하여 명령 수행
+    - Receiver: 실제 작업 수행자
+    - Invoker: 명령을 실행하는 역할. Command 인터페이스의 execute() 메서드 호출
+- 게임의 캐릭터가 움직이는 방법을 예시로 들면 다음과 같다. 움직임에는 걷기, 달리기, 날기가 있다.
+    - Command: 이동을 수행하는 인터페이스.
+    - Concrete Command: 걷기, 달리기, 달기
+    - Receiver: 이동을 수행하는 캐릭터
+    - Invoker: 캐릭터에게 이동하라고 요청하는 컨트롤러
+    - 움직임이 추가되거나 변경되어도 Invoker(호출자)는 명령 수행 방식에 대해 영향을 받지 않는다.
+- 자바의 Runnable 인터페이스가 대표적인 커맨드 패턴이다.
