@@ -70,3 +70,17 @@
     - Invoker: 캐릭터에게 이동하라고 요청하는 컨트롤러
     - 움직임이 추가되거나 변경되어도 Invoker(호출자)는 명령 수행 방식에 대해 영향을 받지 않는다.
 - 자바의 Runnable 인터페이스가 대표적인 커맨드 패턴이다.
+
+### 플라이웨이트 패턴 (Flyweight Pattern)
+
+- 데이터 공유를 통해 객체를 효율적(메모리 사용량 최소화)으로 사용하게 해준다.
+    - 한마디로 캐시를 두고 재사용한다.
+- 구성
+    - Flyweight: 대상 클래스. 공유 가능한 불변 객체여야 한다.
+    - FlyweightFactory: 대상 클래스를 제공(관리)하는 클래스. 별도로 분리하지 않고 Flyweight 클래스 내에 정적 메서드로 만들기도 한다.
+        - Factory를 통해 사용하여 객체를 얻으면 한 번 생성한 객체를 재사용함으로써 최적화가 가능하다.
+- 예) 자바의 Integer.valueOf()에서 -128부터 127까지의 숫자 인스턴스를 캐시해둔다.    
+    ```java
+    System.out.println(Integer.valueOf(127) == Integer.valueOf(127)) // true
+    System.out.println(Integer.valueOf(128) == Integer.valueOf(128)) // false
+    ```
