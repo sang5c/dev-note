@@ -84,3 +84,17 @@
     System.out.println(Integer.valueOf(127) == Integer.valueOf(127)) // true
     System.out.println(Integer.valueOf(128) == Integer.valueOf(128)) // false
     ```
+
+### 메멘토 패턴 (Memento Pattern)
+
+- 객체의 상태를 저장(snapshot)해서 복원 가능하도록 하는 패턴. 메멘토는 기념품을 의미한다.
+- 구성
+    - Originator: 작성자, 저장하고자 하는 상태를 갖고있는 클래스
+    - Memeto: 기념품, 작성자의 상태를 갖는 클래스. Originator만 변경 가능하도록 구성한다.
+    - Caretaker: 관리자, Memento 목록을 갖는다. 추후 상태 복원이 필요하면 Originator에게 Memento를 제공한다.
+- 예) 메멘토 패턴을 활용하면 에디터의 되돌리기(cmd + z) 기능을 구현할 수 있다.
+    - Originator: 에디터. 커서 위치와 본문 내용 등을 갖는다. Memento를 받아 상태를 복구, Memento를 생성(snaphot)하는 기능을 갖는다.
+    - Memento: 저장하고자 하는 상태인 커서 위치와 본문 내용 필드를 가지며 Originator에 의해 생성된다.
+    - Caretaker: Memento 목록을 가지며 되돌리기 기능이 실행될때마다 Originator에 최근 Memento를 전달해서 내용을 복구한다.
+- 자바나 스프링에서 실제 사용중인 예시는 찾지 못했는데 패턴의 컨셉인 스냅샷과 복구라는 개념만 사용중이지 않을까 싶다.
+    - 객체를 버저닝하여 데이터베이스에 저장하는 경우, 데이터베이스를 caretaker, 버저닝하여 저장한 내용을 memento, 실제 사용중인 객체를 originator 느낌으로 바라볼 수 있을 것 같다.
