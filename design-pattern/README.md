@@ -137,3 +137,41 @@
     - Abstraction: 알림 시스템
     - RefinedAbstraction: 퇴근시간 알림 시스템
 - 구성은 좀 어렵게 느껴지지만 의존성 주입을 통한 유연한 구조를 가져가는게 핵심이고, 서로 다른 두 계층(관심사)를 분리하여 각각 확장해 나갈 수 있다.
+
+### 책임 연쇄 패턴 (Chain of Responsibility)
+- 책임을 사슬로 만들고 담당자가 처리하는 방식. 책임을 떠넘기는 구조.
+- 요청자와 처리자의 결합도를 낮춘다. 요청자는 첫 번째 객체만 호출하면 알아서 담당 객체가 요청을 수행한 후 결과를 반환해준다. (체인을 구성하는 역할을 어디선가 수행해야 한다)
+- 구성
+    - Handler: 요청 처리 인터페이스
+    - Concrete Handler: 구체적인 요청 처리자.
+- 핸들러 예시
+    ```kotlin
+    interface Handler {
+        var next: Handler?
+
+        fun handleRequest(request: String): String {
+            if (canSupport(request)) {
+                return process(request)
+            }
+            return next.handleRequest(request)
+        }
+
+        fun process(request: String): String
+
+        fun canSupport(request: String): Boolean
+    }
+
+    // 요청 처리자 구현 생략...
+
+    fun main() {
+        val simpleHandler = SimpleHandler()
+        val lowerCaseHandler = LowerCaseHandler(simpleHandler)
+        val upperCaseHandler = UpperCaseHandler(lowerCaseHandler)
+
+        println(upperCaseHandler.handleRequest("Hello"))  // Prints "HELLO"
+        println(upperCaseHandler.handleRequest("WORLD"))  // Prints "world"
+        println(upperCaseHandler.handleRequest("12345"))  // Prints "success"
+    }
+    ```
+    - upperCaseHandler에게 요청을 처리하라고 시켰는데 사실은 다른 핸들러가 처리한다. 클라이언트가 체인을 구성해야 하고 첫 번째 체인에 요청해야 하는데 가독성이 그리 좋지 않다고 느껴진다.
+    - 스프링 시큐리티의 ProviderManager처럼 관리자를 별도로 두고 클라이언트가 관리자를 통해 사용하는게 가독성면에서 좋아보인다.
