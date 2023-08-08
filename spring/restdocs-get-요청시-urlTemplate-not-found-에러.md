@@ -33,4 +33,5 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 
 ### 참고
 
-- RestDocumentationRequestBuilders.get() 내부에서 requestAttributes()를 호출하고 있는 것을 알 수 있다. 
+![image](https://github.com/sang5c/problem-solutions/assets/28697758/491e43c3-0dad-4502-a35f-01398f856cd7)
+- RestDocumentationRequestBuilders.get() 내부에서 requestAttributes()를 호출하고 있는 것을 볼 수 있다. 
