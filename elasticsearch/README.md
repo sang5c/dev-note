@@ -19,3 +19,26 @@
 - SaaS 사용자에게는 영향이 없다.
 - Apache 2.0 → SSPL
 - https://www.elastic.co/kr/pricing/faq/licensing
+
+### 엘라스틱서치 Analyzer 구조
+
+- Character filter(전처리), Tokenizer(분리), Token filter(후처리) 세 가지 블록으로 구성된다.
+- Character filter
+    - 문자 스트림이 tokenizer로 이동하기 전 전처리 역할
+    - HTML 제거, 문자 매핑, 패턴 문자 변경
+        - 예를 들어 “dkssud”을 “안녕“으로 변환하는 작업, <b>안녕</b>에서 HTML 태그를 제거하는 작업 등이 가능하다.
+    - 0개 이상의 필터가 존재 가능하며 순차 적용된다.
+- Tokenizer
+    - 문자 스트림을 개별 토큰(term)으로 분리하는 역할
+    - 많이 사용되는 Tokenizer로 whitespace가 있다 (공백 문자 기준 분리)
+        - 예) “Hello world” → “Hello”, “world”
+    - 1개 존재해야 한다.
+- Token filter
+    - tokenizer 완료 후 후처리
+    - 토큰의 변환/추가/제거 작업을 수행한다. 대표적인 토큰 필터로 N-gram이 있다.
+        - N에 해당하는 숫자만큼 단어로 분리한다. min, max 설정이 가능하며 “quick”이 “qu”, “ui”로 검색 가능해진다.
+        - 2-gram 예) quick → qu, ui, ic, ck
+    - 0개 이상의 필터가 존재 가능하며 순차 적용된다.
+- Token filter와 Character filter 필터와의 차이점은 실행 시점(전/후처리)에서 오는 대상, 즉 “전체 텍스트“이냐, “token”이냐 대상의 차이다.
+    - 토큰 필터는 토큰 또는 토큰을 구성하는 문자의 순서 변경이 불가능하다
+- 한 줄 정리하면 Analyzer는 여러 필터와 한 개의 토크나이저를 조합해서 만들 수 있으며 문자열을 입맛에 맞게 가공한다.
